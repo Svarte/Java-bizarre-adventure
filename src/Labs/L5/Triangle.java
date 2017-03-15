@@ -1,14 +1,12 @@
 package Labs.L5;
 
-import java.util.ArrayList;
-import java.util.List;
+/* 1. Создать класс «Треугольник» с полями длин сторон А, В и С, а также методами вычисления площади и периметра. Программа должна выдавать результаты работы методов по введенным с клавиатуры длинам сторон.
+* 2. Решить задачу 1 используя проверку существования такого треугольника, реализованную через методы внутреннего класса.*/
 import java.util.Scanner;
-
-
 public class Triangle {
-    protected double a;
-    protected double b;
-    protected double c;
+    double a;
+    double b;
+    double c;
 
     private Triangle(double a, double b, double c) {
         this.a = a;
@@ -16,12 +14,11 @@ public class Triangle {
         this.c = c;
     }
 
-    public Triangle() {
+    Triangle() {
         Scanner tmp = new Scanner(System.in);
         double a = tmp.nextDouble();
         double b = tmp.nextDouble();
         double c = tmp.nextDouble();
-
 
         class CheCKer {
             boolean check(double f, double s, double t) {
@@ -55,6 +52,5 @@ public class Triangle {
     public static void main(String[] args) {
         Triangle tmp = new Triangle();
         System.out.println(tmp.perimeter() + "   " + tmp.area());
-
     }
 }

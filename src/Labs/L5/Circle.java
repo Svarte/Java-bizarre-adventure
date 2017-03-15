@@ -1,17 +1,22 @@
 package Labs.L5;
 
-import java.util.Scanner;
 
+/* 1. Создайте в классе Circle метод, вычисляющий длину окружности.
+* 2. Создайте в классе Circle метод, перемещающий центр круга в случайную точку квадрата координатной плоскости с диагональю от [-99;-99] до [99;99]. Обратите внимание на то, что требуется создать обычный метод, применимый к уже существующему объекту, а не конструктор создающий новый объект.
+* 3. Измените в классе Circle конструктор по умолчанию так, чтобы в момент создания объекта с его помощью, координаты центра и радиус окружности пользователь вводил с клавиатуры.
+* 4. Создайте в классе Circle метод, вычисляющий расстояние между центрами двух окружностей.
+* 5. Создайте в классе Circle метод, проверяющий, касаются ли окружности в одной точке. Учтите, что возможен вариант, когда одна окружность содержится внутри другой и при этом всё равно возможно касание в одной точке.*/
+
+/* 4. С помощью интерфейса с полем значения числа Пи и методами определения длины и площади окружности найти длину и площадь по заданному радиусу.*/
+
+import java.util.Scanner;
 interface FigureProperty {
     double PI = Math.PI;
-
     double area();
-
     double perimeter();
 }
 
 public class Circle implements FigureProperty {
-
     private double x;
     private double y;
     private double r;
@@ -44,16 +49,15 @@ public class Circle implements FigureProperty {
 
     public Circle() {
         Scanner tmp = new Scanner(System.in);
-        this.x = tmp.nextInt();
-        this.y = tmp.nextInt();
-        this.r = tmp.nextInt();
+        this.x = tmp.nextDouble();
+        this.y = tmp.nextDouble();
+        this.r = tmp.nextDouble();
     }
 
     private Circle(double a, double b, double s) {
         this.x = a;
         this.y = b;
         this.r = s;
-
     }
 
     public static double ctcDistance(Circle a, Circle b) {
@@ -66,27 +70,17 @@ public class Circle implements FigureProperty {
         double eps = 1.E-14;
 
         double t1 = Math.acos((a.x - b.x) / (b.r - a.r));
-        double t2 = 2 * Math.PI - t1;
-
+        double t2 = 2 * PI - t1;
         boolean tmp1 = Math.abs(((a.y - b.y)) - ((b.r - a.r) * Math.sin(t1))) <= eps;
         boolean tmp2 = Math.abs(((a.y - b.y)) - ((b.r - a.r) * Math.sin(t2))) <= eps;
 
         if (tmp1 || tmp2) return true;  // if inside
-        //----------------------------------------------------------------
-        t1 = Math.acos((b.x - a.x) / (a.r + b.r));
-        t2 = 2 * Math.PI - t1;
 
+        t1 = Math.acos((b.x - a.x) / (a.r + b.r));
+        t2 = 2 * PI - t1;
         tmp1 = Math.abs(((a.r + b.r) * Math.sin(t1)) - (b.y - a.y)) <= eps;
         tmp2 = Math.abs(((a.r + b.r) * Math.sin(t2)) - (b.y - a.y)) <= eps;
 
-        return tmp1 || tmp2;
-
-    }
-
-    public static void main(String[] args) {
-        Circle A = new Circle(0, 0, 1);
-        Circle B = new Circle(0, 0, 1);
-        System.out.println(contact(A, B));
-
+        return tmp1 || tmp2; // if outside
     }
 }

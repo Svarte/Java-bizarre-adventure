@@ -1,5 +1,5 @@
 package Labs.L7plus;
 
 public interface PassangersAuto {
-    void transferPeoples();
+    void transferPeoples(int numberOfPassengers);
 }
